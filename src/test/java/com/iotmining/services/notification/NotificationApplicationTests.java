@@ -1,4 +1,4 @@
-package com.iotmining.notification;
+package com.iotmining.services.notification;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

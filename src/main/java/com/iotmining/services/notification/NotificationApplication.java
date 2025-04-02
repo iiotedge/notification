@@ -1,4 +1,4 @@
-package com.iotmining.notification;
+package com.iotmining.services.notification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
