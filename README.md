@@ -9,6 +9,55 @@ Welcome to the **IoTMining Notification Service**. This service allows sending r
 
 ---
 
+## 🔧 Core Features
+
+- [x] WebSocket-based notification delivery
+- [x] SMS delivery via external gateway
+- [x] Push notification (FCM) integration
+- [x] Telegram bot support
+- [x] Header validation: `Correlation-ID`, `Tenant-ID`, `Authorization`
+- [ ] Update URI from `/api/notifications/send` to `/api/notify`
+- [ ] Add email notification support
+- [ ] Add WhatsApp integration (future phase)
+
+---
+
+## 🧪 Testing & Validation
+
+- [x] Unit tests for JSON schema validation
+- [ ] Integration tests for retry mechanism
+- [ ] Load testing for high-volume notifications
+- [ ] Validate message ordering by timestamp
+
+---
+
+## 📦 DevOps / Deployment
+
+- [x] Dockerize service
+- [ ] Helm chart creation for Kubernetes deployment
+- [ ] CI/CD pipeline for staging and production environments
+- [ ] Centralized logging and alerting setup
+
+---
+
+## 📚 Documentation
+
+- [x] Create README with API usage and samples
+- [x] Markdown file with examples per notification type
+- [x] OpenAPI / Swagger documentation
+- [ ] Postman collection for quick testing
+
+---
+
+## 📈 Future Enhancements
+
+- [ ] Notification tracking status via API (`delivered`, `read`, `failed`)
+- [ ] WebSocket acknowledgment and receipt storage
+- [ ] User preferences (e.g., opt-in/out per channel)
+- [ ] Admin dashboard to monitor notifications in real-time
+
+---
+
 ## 🧾 Required HTTP Headers
 
 All requests to the Notification API **must** include the following headers:
@@ -48,7 +97,7 @@ Used to deliver UI-based notifications on the web dashboard.
 **Request Example:**
 
 ```
-POST /api/notify
+POST /api/notifications/send
 Authorization: Bearer <your-jwt-token>
 Correlation-ID: notif-web-001
 Tenant-ID: tenant-iot-mining
@@ -85,7 +134,7 @@ Used to send text-based alerts to registered mobile numbers.
 **Request Example:**
 
 ```
-POST /api/notify
+POST /api/notifications/send
 Authorization: Bearer <your-jwt-token>
 Correlation-ID: notif-sms-002
 Tenant-ID: tenant-iot-mining
@@ -115,7 +164,7 @@ Used for mobile push alerts via FCM or compatible services.
 **Request Example:**
 
 ```
-POST /api/notify
+POST /api/notifications/send
 Authorization: Bearer <your-jwt-token>
 Correlation-ID: push-def-003
 Tenant-ID: tenant-iot-mining
@@ -148,7 +197,7 @@ Used to notify users through Telegram bots.
 **Request Example:**
 
 ```
-POST /api/notify
+POST /api/notifications/send
 Authorization: Bearer <your-jwt-token>
 Correlation-ID: telegram-xyz-002
 Tenant-ID: tenant-fleet-manager
