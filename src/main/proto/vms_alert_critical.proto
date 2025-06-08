@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.iotmining.services.notification.grpc;
+
+option java_package = "com.iotmining.services.notification.grpc";
+option java_outer_classname = "CriticalAlertProto";
+
+// Critical Alert Message Structure
+message CriticalAlert {
+  string userId = 1;
+  string type = 2;
+  string priority = 3;
+  string message = 4;
+  string timestamp = 5;
+  repeated string channels = 6; // SMS, EMAIL, PUSH, etc.
+  map<string, string> meta = 7; // Additional meta data like email, phone, etc.
+}
+
+// Service for handling critical alerts
+service CriticalAlertService {
+  rpc sendCriticalAlert(CriticalAlert) returns (AlertResponse);
+}
+
+// Response for the alert sending
+message AlertResponse {
+  string status = 1;  // "Success" or "Failure"
+  string details = 2; // More information about the status
+}
+

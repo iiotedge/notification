@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <property name="LOG_PATH" value="logs"/>
+    <property name="LOG_FILE" value="${LOG_PATH}/notification-service.log"/>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <fieldName>timestamp</fieldName>
+                </timestamp>
+                <logLevel>
+                    <fieldName>level</fieldName>
+                </logLevel>
+                <loggerName>
+                    <fieldName>logger</fieldName>
+                </loggerName>
+                <threadName>
+                    <fieldName>thread</fieldName>
+                </threadName>
+                <mdc>
+                    <fieldNames>
+                        <traceId>traceId</traceId>
+                        <spanId>spanId</spanId>
+                        <correlationId>correlationId</correlationId>
+                        <tenantId>tenantId</tenantId>
+                        <internalRequestId>internalRequestId</internalRequestId>
+                    </fieldNames>
+                </mdc>
+                <message/>
+                <stackTrace/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- Rolling File Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archived/notification-service.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <logLevel/>
+                <loggerName/>
+                <threadName/>
+                <mdc>
+                    <fieldNames>
+                        <traceId>traceId</traceId>
+                        <spanId>spanId</spanId>
+                        <correlationId>correlationId</correlationId>
+                        <tenantId>tenantId</tenantId>
+                        <internalRequestId>internalRequestId</internalRequestId>
+                    </fieldNames>
+                </mdc>
+                <message/>
+                <stackTrace/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="com.iotmining" level="DEBUG"/>
+
+</configuration>
+
+        <!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration scan="true">-->
+
+<!--    <property name="LOG_PATH" value="logs"/>-->
+<!--    <property name="LOG_FILE" value="${LOG_PATH}/notification-service.log"/>-->
+
+<!--    &lt;!&ndash; Console Appender &ndash;&gt;-->
+<!--    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+<!--            <providers>-->
+<!--                <timestamp>-->
+<!--                    <fieldName>timestamp</fieldName>-->
+<!--                </timestamp>-->
+<!--                <logLevel>-->
+<!--                    <fieldName>level</fieldName>-->
+<!--                </logLevel>-->
+<!--                <loggerName>-->
+<!--                    <fieldName>logger</fieldName>-->
+<!--                </loggerName>-->
+<!--                <threadName>-->
+<!--                    <fieldName>thread</fieldName>-->
+<!--                </threadName>-->
+<!--                <mdc>-->
+<!--                    <fieldNames>-->
+<!--                        <correlationId>correlationId</correlationId>-->
+<!--                        <tenantId>tenantId</tenantId>-->
+<!--                        <internalRequestId>internalRequestId</internalRequestId>-->
+<!--                    </fieldNames>-->
+<!--                </mdc>-->
+<!--                <message/>-->
+<!--                <stackTrace/>-->
+<!--            </providers>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    &lt;!&ndash; Rolling File Appender &ndash;&gt;-->
+<!--    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>${LOG_FILE}</file>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>${LOG_PATH}/archived/notification-service.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+<!--            <maxHistory>30</maxHistory>-->
+<!--        </rollingPolicy>-->
+<!--        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+<!--            <providers>-->
+<!--                <timestamp/>-->
+<!--                <logLevel/>-->
+<!--                <loggerName/>-->
+<!--                <threadName/>-->
+<!--                <mdc>-->
+<!--                    <fieldNames>-->
+<!--                        <correlationId>correlationId</correlationId>-->
+<!--                        <tenantId>tenantId</tenantId>-->
+<!--                        <internalRequestId>internalRequestId</internalRequestId>-->
+<!--                    </fieldNames>-->
+<!--                </mdc>-->
+<!--                <message/>-->
+<!--                <stackTrace/>-->
+<!--            </providers>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="CONSOLE"/>-->
+<!--        <appender-ref ref="FILE"/>-->
+<!--    </root>-->
+
+<!--    <logger name="com.iotmining" level="DEBUG"/>-->
+<!--</configuration>-->

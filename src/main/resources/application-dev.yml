@@ -1,0 +1,86 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: thecodenaive@gmail.com
+    password: "odfo wfpt stcb gcbg"
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  redis:
+    host: localhost
+    port: 6379
+    password: 8506  # If applicable
+    lettuce:
+      pool:
+        max-active: 10
+        max-wait: -1
+        max-idle: 5
+        min-idle: 1
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    sender:
+      type: WEB
+
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0  # 100% sampling
+
+kafka:
+  bootstrap-servers: localhost:9092
+  consumer:
+    notification-topic: vms-alerts
+    group-id: vms-alert-group
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+messaging:
+  provider: twilio
+#  provider: nexmo
+  nexmo:
+    api-key: f899929d
+    api-secret: 0dKcVTH2U4i5HnVu
+    from: iotmining
+  twilio:
+    account-sid: ACee7bba0b011dc11bcd39b9e2da066294
+    auth-token: 930957e8e6639ddd29f92e9705243cbb
+    phone-number: "+19125590669"
+  telegram:
+    bot-token: 7815455641:AAEfZrNkBDuiVt0cOsgGNLxAlohz05U8GEo
+    chat-id: -4631518396
+
+
+firebase:
+  credentials:
+    path: firebase/iotmining-8506-firebase-adminsdk-fbsvc-3ee37e730e.json
+
+#firebase:
+#  credentials:
+#    path: classpath:firebase/serviceAccountKey.json
+
+server:
+  port: 8087
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761/eureka/}
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true  # Use IP instead of hostname for discovery
+
+jwt:
+  secret: "Vlo2vcFdiXGgWqZLEpLw6kk99sH8/4odgC2XgZV0IbA="
+
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0  # 100% tracing
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
