@@ -47,7 +47,7 @@ firebase:
     path: ${FIREBASE_CREDENTIAL_PATH:/config/firebase/serviceAccountKey.json}
 
 server:
-  port: ${SERVER_PORT:8087}
+  port: ${SERVER_PORT:9059}
 
 eureka:
   client:

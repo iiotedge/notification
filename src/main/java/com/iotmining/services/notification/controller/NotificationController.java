@@ -7,10 +7,7 @@ import com.iotmining.services.notification.services.dispatcher.NotificationDispa
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -100,6 +97,35 @@ public class NotificationController {
             // that might be processed by the same thread from the thread pool, avoiding log confusion.
             log.debug("MDC cleared for internalRequestId: {}", internalRequestId);
             MDC.clear();
+        }
+    }
+
+    // in com.iotmining.services.notification.controller.NotificationController
+    @PostMapping("/internal/send")
+    public BaseResponse<NotificationResponse> internalSend(
+            @RequestBody com.fasterxml.jackson.databind.JsonNode requestBody,
+            @RequestHeader("X-Prospect-ID") String prospectId) {
+
+        String internalRequestId = java.util.UUID.randomUUID().toString();
+        org.slf4j.MDC.put("internalRequestId", internalRequestId);
+        org.slf4j.MDC.put("prospectId", prospectId);
+
+        try {
+            // Ensure 'userId' exists for dispatcher (it expects a textual UUID)
+            com.fasterxml.jackson.databind.node.ObjectNode mutable = requestBody.deepCopy();
+            if (!mutable.hasNonNull("userId")) {
+                mutable.put("userId", prospectId);
+            }
+
+            NotificationResponse response = dispatcher.dispatch(mutable);
+            String correlationId = response.getCorrelationId() != null ? response.getCorrelationId().toString() : null;
+            return BaseResponse.success(correlationId, response, response.isDelivered());
+
+        } catch (Exception e) {
+            log.error("Internal notification error (ID {}): {}", internalRequestId, e.getMessage(), e);
+            return BaseResponse.failure(internalRequestId, "Error: " + e.getMessage());
+        } finally {
+            org.slf4j.MDC.clear();
         }
     }
 }

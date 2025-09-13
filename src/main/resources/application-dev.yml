@@ -62,7 +62,7 @@ firebase:
 #    path: classpath:firebase/serviceAccountKey.json
 
 server:
-  port: 8087
+  port: 8059
 
 eureka:
   client:

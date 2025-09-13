@@ -7,7 +7,7 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
 server:
-  port: 8087
+  port: 8059
 
 eureka:
   client:
