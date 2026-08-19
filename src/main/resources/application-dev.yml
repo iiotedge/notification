@@ -7,16 +7,17 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-  redis:
-    host: localhost
-    port: 6379
-    password: 8506  # If applicable
-    lettuce:
-      pool:
-        max-active: 10
-        max-wait: -1
-        max-idle: 5
-        min-idle: 1
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 8506  # If applicable
+      lettuce:
+        pool:
+          max-active: 10
+          max-wait: -1
+          max-idle: 5
+          min-idle: 1
   zipkin:
     base-url: http://localhost:9411
     enabled: true

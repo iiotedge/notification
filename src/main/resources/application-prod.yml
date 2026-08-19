@@ -8,16 +8,17 @@ spring:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
 
-  redis:
-    host: ${REDIS_HOST}
-    port: ${REDIS_PORT:6379}
-    password: ${REDIS_PASSWORD:}
-    lettuce:
-      pool:
-        max-active: 10
-        max-wait: -1
-        max-idle: 5
-        min-idle: 1
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      lettuce:
+        pool:
+          max-active: 10
+          max-wait: -1
+          max-idle: 5
+          min-idle: 1
 
 kafka:
   bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
@@ -45,6 +46,9 @@ messaging:
 firebase:
   credentials:
     path: ${FIREBASE_CREDENTIAL_PATH:/config/firebase/serviceAccountKey.json}
+
+jwt:
+  secret: ${JWT_SECRET_KEY_BASE64}
 
 server:
   port: ${SERVER_PORT:9059}
