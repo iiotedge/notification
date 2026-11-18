@@ -5,7 +5,7 @@ import io.github.bucket4j.distributed.proxy.ProxyManager;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.codec.ByteArrayCodec;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.data.redis.autoconfigure.DataRedisProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,7 +19,7 @@ public class Bucket4jConfig {
 //        StatefulRedisConnection<String, byte[]> connection = redisClient.connect(new ByteArrayCodec());
 //
 //        // Create a ProxyManager for managing the rate-limiting buckets
-//        return Bucket4j.extension(RedisProperties.Lettuce.class)
+//        return Bucket4j.extension(DataRedisProperties.Lettuce.class)
 //                .proxyManagerFor(connection);
 //    }
 }
